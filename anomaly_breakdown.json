@@ -1,0 +1,164 @@
+[
+  {
+    "date": "20201117",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "desktop",
+      "delta": 28.0,
+      "contribution_pct": 57.2,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "country",
+      "value": "United States",
+      "delta": 20.1,
+      "contribution_pct": 46.0,
+      "is_catchall_bucket": false
+    }
+  },
+  {
+    "date": "20201120",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "mobile",
+      "delta": 36.4,
+      "contribution_pct": 61.4,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "traffic_source",
+      "value": "google",
+      "delta": 23.4,
+      "contribution_pct": 38.6,
+      "is_catchall_bucket": false
+    }
+  },
+  {
+    "date": "20201123",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "desktop",
+      "delta": 36.2,
+      "contribution_pct": 49.6,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "country",
+      "value": "other_country",
+      "delta": 32.5,
+      "contribution_pct": 47.3,
+      "is_catchall_bucket": true
+    }
+  },
+  {
+    "date": "20201124",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "desktop",
+      "delta": 45.1,
+      "contribution_pct": 62.4,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "country",
+      "value": "United States",
+      "delta": 29.1,
+      "contribution_pct": 42.9,
+      "is_catchall_bucket": false
+    }
+  },
+  {
+    "date": "20201220",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "desktop",
+      "delta": -54.9,
+      "contribution_pct": 59.2,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "country",
+      "value": "United States",
+      "delta": -41.6,
+      "contribution_pct": 43.3,
+      "is_catchall_bucket": false
+    }
+  },
+  {
+    "date": "20210112",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "country",
+      "value": "United States",
+      "delta": 16.7,
+      "contribution_pct": 90.2,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "device_type",
+      "value": "desktop",
+      "delta": 13.7,
+      "contribution_pct": 56.3,
+      "is_catchall_bucket": false
+    }
+  },
+  {
+    "date": "20210114",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "mobile",
+      "delta": 15.6,
+      "contribution_pct": 54.5,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "country",
+      "value": "Canada",
+      "delta": 12.6,
+      "contribution_pct": 55.3,
+      "is_catchall_bucket": false
+    }
+  },
+  {
+    "date": "20210120",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "desktop",
+      "delta": 37.8,
+      "contribution_pct": 60.0,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "country",
+      "value": "United States",
+      "delta": 21.9,
+      "contribution_pct": 38.1,
+      "is_catchall_bucket": false
+    }
+  },
+  {
+    "date": "20210122",
+    "driver_status": "concentrated",
+    "top_driver": {
+      "dimension": "device_type",
+      "value": "desktop",
+      "delta": 37.9,
+      "contribution_pct": 62.5,
+      "is_catchall_bucket": false
+    },
+    "secondary_driver": {
+      "dimension": "traffic_source",
+      "value": "google",
+      "delta": 25.9,
+      "contribution_pct": 42.5,
+      "is_catchall_bucket": false
+    }
+  }
+]
