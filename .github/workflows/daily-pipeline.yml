@@ -1,0 +1,43 @@
+name: Daily Anomaly Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_date:
+        description: 'Optional override date (YYYYMMDD) for testing'
+        required: false
+        default: ''
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install google-cloud-bigquery db-dtypes pandas groq requests python-dotenv
+
+      - name: Write service account key
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: printf '%s' "$GCP_SA_KEY" > /tmp/key.json
+
+      - name: Run pipeline
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/key.json
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ -n "${{ github.event.inputs.test_date }}" ]; then
+            python3 pipeline.py --date "${{ github.event.inputs.test_date }}"
+          else
+            python3 pipeline.py
+          fi
