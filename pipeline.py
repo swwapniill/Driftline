@@ -3,6 +3,8 @@ import pandas as pd
 import json
 import argparse
 import os
+import requests
+from datetime import datetime
 from dotenv import load_dotenv
 from groq import Groq
 from date_mapper import get_simulated_date
@@ -11,6 +13,7 @@ from prompt_template import SYSTEM_PROMPT
 load_dotenv()
 client = bigquery.Client(project="anomaly-explainer")
 groq_client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
 
 def check_anomaly(target_date):
     query = """
@@ -115,6 +118,17 @@ def explain_anomaly(anomaly_data):
     )
     return response.choices[0].message.content
 
+def send_to_slack(result, explanation):
+    formatted_date = datetime.strptime(result['date'], '%Y%m%d').strftime('%B %d, %Y')
+    message = (
+        f"*Anomaly Detected — {formatted_date}*\n"
+        f"Actual: {result['actual']} | Rolling avg: {result['rolling_mean']} | Z-score: {result['z_score']}\n\n"
+        f"{explanation}"
+    )
+    payload = {"text": message}
+    response = requests.post(SLACK_WEBHOOK_URL, json=payload)
+    return response.status_code
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", help="Override date (YYYYMMDD) for testing", default=None)
@@ -135,3 +149,9 @@ if __name__ == "__main__":
         explanation = explain_anomaly(result)
         print("\n--- EXPLANATION ---")
         print(explanation)
+
+        print("\nSending to Slack...")
+        status = send_to_slack(result, explanation)
+        print("Slack status code:", status)
+    else:
+        print("No anomaly detected — nothing sent to Slack.")
