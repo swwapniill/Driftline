@@ -2,6 +2,7 @@ from google.cloud import bigquery
 import pandas as pd
 import json
 import plotly.graph_objects as go
+from datetime import datetime, timezone
 
 client = bigquery.Client(project="anomaly-explainer")
 
@@ -41,7 +42,6 @@ for _, row in df.iterrows():
         point_colors.append('#4C5561')
         point_sizes.append(5)
 
-# Build Plotly chart
 fig = go.Figure()
 fig.add_trace(go.Scatter(
     x=chart_dates, y=chart_values,
@@ -62,7 +62,7 @@ fig.update_layout(
 )
 chart_html = fig.to_html(full_html=False, include_plotlyjs='cdn', config={'displayModeBar': False})
 
-# Build table rows
+# Build expandable table rows using <details>/<summary> — no JS needed
 table_rows = ""
 for a in sorted(anomalies, key=lambda x: x['date']):
     d = pd.to_datetime(a['date'], format='%Y%m%d').strftime('%b %d, %Y')
@@ -73,13 +73,20 @@ for a in sorted(anomalies, key=lambda x: x['date']):
     if top and top.get('is_catchall_bucket'):
         top_text += " (unclear category)"
     contribution = f"{top['contribution_pct']}%" if top else "—"
+    explanation = a.get('explanation', 'No explanation generated.')
+
     table_rows += f"""
-    <tr>
+    <tr class="row-summary">
       <td>{d}</td>
       <td><span class="badge" style="color:{badge_color}; border-color:{badge_color}">{direction}</span></td>
       <td>{top_text}</td>
       <td>{contribution}</td>
+    </tr>
+    <tr class="row-detail">
+      <td colspan="4" class="explanation-cell">{explanation}</td>
     </tr>"""
+
+generated_at = datetime.now(timezone.utc).strftime('%b %d, %Y, %H:%M UTC')
 
 html_output = f"""<!DOCTYPE html>
 <html lang="en">
@@ -106,7 +113,8 @@ html_output = f"""<!DOCTYPE html>
   }}
   .container {{ max-width: 960px; margin: 0 auto; }}
   h1 {{ font-size: 1.6rem; font-weight: 600; margin: 0 0 4px 0; }}
-  .subtitle {{ color: var(--muted); font-size: 0.95rem; margin-bottom: 40px; }}
+  .subtitle {{ color: var(--muted); font-size: 0.95rem; margin-bottom: 8px; }}
+  .updated {{ color: var(--muted); font-size: 0.78rem; font-family: 'IBM Plex Mono', monospace; margin-bottom: 40px; }}
   .kpi-row {{
     display: flex; gap: 1px; background: var(--border);
     border: 1px solid var(--border); margin-bottom: 40px;
@@ -128,6 +136,14 @@ html_output = f"""<!DOCTYPE html>
     padding: 12px; border-bottom: 1px solid var(--border);
     font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
   }}
+  .row-summary {{ cursor: pointer; }}
+  .row-summary:hover {{ background: #1C232C; }}
+  .row-detail {{ display: none; }}
+  .row-detail.open {{ display: table-row; }}
+  .explanation-cell {{
+    font-family: 'IBM Plex Sans', sans-serif; color: var(--muted);
+    font-size: 0.85rem; line-height: 1.5; background: #10151C;
+  }}
   .badge {{
     border: 1px solid; padding: 2px 8px; font-size: 0.78rem; border-radius: 3px;
   }}
@@ -138,6 +154,7 @@ html_output = f"""<!DOCTYPE html>
 <div class="container">
   <h1>Driftline</h1>
   <div class="subtitle">Driftline — anomaly detection & root-cause explanation for e-commerce metrics. GA4 sample dataset, {date_range_start} to {date_range_end}</div>
+  <div class="updated">Last updated: {generated_at}</div>
 
   <div class="kpi-row">
     <div class="kpi"><div class="kpi-value">{days_monitored}</div><div class="kpi-label">Days monitored</div></div>
@@ -152,15 +169,24 @@ html_output = f"""<!DOCTYPE html>
   </div>
 
   <div class="panel">
-    <div class="panel-title">Anomaly log</div>
+    <div class="panel-title">Anomaly log — click a row for the full explanation</div>
     <table>
       <thead><tr><th>Date</th><th>Type</th><th>Top driver</th><th>Contribution</th></tr></thead>
       <tbody>{table_rows}</tbody>
     </table>
   </div>
 
-  <footer>Detection: 14-day rolling z-score (threshold 1.8). Explanations generated via a grounded LLM layer — see repo README for methodology and known limitations.</footer>
+  <footer>Detection: 14-day rolling z-score (threshold 1.8). Explanations generated via a grounded LLM layer (Groq, openai/gpt-oss-120b) — see repo README for methodology and known limitations. Pipeline runs daily via GitHub Actions.</footer>
 </div>
+
+<script>
+document.querySelectorAll('.row-summary').forEach(row => {{
+  row.addEventListener('click', () => {{
+    const detail = row.nextElementSibling;
+    detail.classList.toggle('open');
+  }});
+}});
+</script>
 </body>
 </html>
 """
