@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ops Anomaly Explainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1419;
+    --panel: #161B22;
+    --text: #E6EDF3;
+    --muted: #8B949E;
+    --border: #2A3138;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin: 0;
+    padding: 48px 24px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 4px 0; }
+  .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 40px; }
+  .kpi-row {
+    display: flex; gap: 1px; background: var(--border);
+    border: 1px solid var(--border); margin-bottom: 40px;
+  }
+  .kpi { flex: 1; background: var(--panel); padding: 20px 24px; }
+  .kpi-value { font-family: 'IBM Plex Mono', monospace; font-size: 1.8rem; font-weight: 500; }
+  .kpi-label { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 24px; margin-bottom: 32px;
+  }
+  .panel-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 16px; color: var(--text); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th {
+    text-align: left; color: var(--muted); font-weight: 500;
+    padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 0.82rem;
+  }
+  td {
+    padding: 12px; border-bottom: 1px solid var(--border);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
+  }
+  .badge {
+    border: 1px solid; padding: 2px 8px; font-size: 0.78rem; border-radius: 3px;
+  }
+  footer { color: var(--muted); font-size: 0.8rem; margin-top: 24px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Ops anomaly explainer</h1>
+  <div class="subtitle">Daily purchase monitoring — GA4 e-commerce sample dataset, Nov 01, 2020 to Jan 31, 2021</div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-value">92</div><div class="kpi-label">Days monitored</div></div>
+    <div class="kpi"><div class="kpi-value">9</div><div class="kpi-label">Anomalies detected</div></div>
+    <div class="kpi"><div class="kpi-value" style="color:#F0883E">8</div><div class="kpi-label">Spikes</div></div>
+    <div class="kpi"><div class="kpi-value" style="color:#58A6FF">1</div><div class="kpi-label">Dips</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Daily purchases, with detected anomalies</div>
+    <div style="height:380px; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="c3ad06cd-60f6-45dc-a6ad-a17f98be4091" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("c3ad06cd-60f6-45dc-a6ad-a17f98be4091")) {                    Plotly.newPlot(                        "c3ad06cd-60f6-45dc-a6ad-a17f98be4091",                        [{"hovertemplate":"%{x}\u003cbr\u003ePurchases: %{y}\u003cextra\u003e\u003c\u002fextra\u003e","line":{"color":"#39424D","width":1.5},"marker":{"color":["#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#F0883E","#4C5561","#4C5561","#F0883E","#4C5561","#4C5561","#F0883E","#F0883E","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#58A6FF","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#F0883E","#4C5561","#F0883E","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#F0883E","#4C5561","#F0883E","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561","#4C5561"],"line":{"width":0},"size":[5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,11,5,5,11,5,5,11,11,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,11,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,11,5,11,5,5,5,5,5,11,5,11,5,5,5,5,5,5,5,5,5]},"mode":"lines+markers","x":["2020-11-01","2020-11-02","2020-11-03","2020-11-04","2020-11-05","2020-11-06","2020-11-07","2020-11-08","2020-11-09","2020-11-10","2020-11-11","2020-11-12","2020-11-13","2020-11-14","2020-11-15","2020-11-16","2020-11-17","2020-11-18","2020-11-19","2020-11-20","2020-11-21","2020-11-22","2020-11-23","2020-11-24","2020-11-25","2020-11-26","2020-11-27","2020-11-28","2020-11-29","2020-11-30","2020-12-01","2020-12-02","2020-12-03","2020-12-04","2020-12-05","2020-12-06","2020-12-07","2020-12-08","2020-12-09","2020-12-10","2020-12-11","2020-12-12","2020-12-13","2020-12-14","2020-12-15","2020-12-16","2020-12-17","2020-12-18","2020-12-19","2020-12-20","2020-12-21","2020-12-22","2020-12-23","2020-12-24","2020-12-25","2020-12-26","2020-12-27","2020-12-28","2020-12-29","2020-12-30","2020-12-31","2021-01-01","2021-01-02","2021-01-03","2021-01-04","2021-01-05","2021-01-06","2021-01-07","2021-01-08","2021-01-09","2021-01-10","2021-01-11","2021-01-12","2021-01-13","2021-01-14","2021-01-15","2021-01-16","2021-01-17","2021-01-18","2021-01-19","2021-01-20","2021-01-21","2021-01-22","2021-01-23","2021-01-24","2021-01-25","2021-01-26","2021-01-27","2021-01-28","2021-01-29","2021-01-30","2021-01-31"],"y":[14,49,49,46,26,58,31,32,52,64,64,54,79,30,21,69,98,68,84,118,68,60,141,147,108,57,97,78,51,141,107,82,90,96,87,42,110,122,150,143,160,106,74,99,139,143,126,107,52,20,53,60,67,23,17,17,20,36,24,37,25,14,14,14,16,29,31,26,34,20,14,28,48,36,54,47,27,14,19,49,96,52,100,43,36,61,55,54,69,54,31,19],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"font":{"family":"IBM Plex Mono, monospace","color":"#8B949E","size":12},"xaxis":{"gridcolor":"#2A3138","showline":false},"yaxis":{"gridcolor":"#2A3138","showline":false,"title":{"text":"Daily purchases"}},"margin":{"l":50,"r":30,"t":20,"b":40},"plot_bgcolor":"#161B22","paper_bgcolor":"#161B22","height":380,"hovermode":"closest"},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Anomaly log</div>
+    <table>
+      <thead><tr><th>Date</th><th>Type</th><th>Top driver</th><th>Contribution</th></tr></thead>
+      <tbody>
+    <tr>
+      <td>Nov 17, 2020</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>device type: desktop</td>
+      <td>57.2%</td>
+    </tr>
+    <tr>
+      <td>Nov 20, 2020</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>device type: mobile</td>
+      <td>61.4%</td>
+    </tr>
+    <tr>
+      <td>Nov 23, 2020</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>device type: desktop</td>
+      <td>49.6%</td>
+    </tr>
+    <tr>
+      <td>Nov 24, 2020</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>device type: desktop</td>
+      <td>62.4%</td>
+    </tr>
+    <tr>
+      <td>Dec 20, 2020</td>
+      <td><span class="badge" style="color:#58A6FF; border-color:#58A6FF">Dip</span></td>
+      <td>device type: desktop</td>
+      <td>59.2%</td>
+    </tr>
+    <tr>
+      <td>Jan 12, 2021</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>country: United States</td>
+      <td>90.2%</td>
+    </tr>
+    <tr>
+      <td>Jan 14, 2021</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>device type: mobile</td>
+      <td>54.5%</td>
+    </tr>
+    <tr>
+      <td>Jan 20, 2021</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>device type: desktop</td>
+      <td>60.0%</td>
+    </tr>
+    <tr>
+      <td>Jan 22, 2021</td>
+      <td><span class="badge" style="color:#F0883E; border-color:#F0883E">Spike</span></td>
+      <td>device type: desktop</td>
+      <td>62.5%</td>
+    </tr></tbody>
+    </table>
+  </div>
+
+  <footer>Detection: 14-day rolling z-score (threshold 1.8). Explanations generated via a grounded LLM layer — see repo README for methodology and known limitations.</footer>
+</div>
+</body>
+</html>
