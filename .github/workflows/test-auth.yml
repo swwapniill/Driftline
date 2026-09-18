@@ -19,7 +19,12 @@ jobs:
         run: pip install google-cloud-bigquery db-dtypes
 
       - name: Write service account key
-        run: echo '${{ secrets.GCP_SA_KEY }}' > /tmp/key.json
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: printf '%s' "$GCP_SA_KEY" > /tmp/key.json
+
+      - name: Validate key file is real JSON
+        run: python3 -m json.tool /tmp/key.json > /dev/null && echo "Valid JSON"
 
       - name: Test BigQuery connection
         env:
