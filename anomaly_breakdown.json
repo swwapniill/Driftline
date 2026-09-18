@@ -15,7 +15,8 @@
       "delta": 20.1,
       "contribution_pct": 46.0,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "Desktop usage jumped by 28.0 points on\u202f2020\u201111\u201117, which alone contributed 57.2\u202f% of the shift. Separately, the United\u202fStates saw a 20.1\u2011point increase, accounting for 46.0\u202f% of the change."
   },
   {
     "date": "20201120",
@@ -33,7 +34,8 @@
       "delta": 23.4,
       "contribution_pct": 38.6,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "Mobile usage spiked, rising 36.4% and representing 61.4% of the change. Separately, traffic from Google increased by 23.4%, accounting for 38.6% of the anomaly."
   },
   {
     "date": "20201123",
@@ -51,7 +53,8 @@
       "delta": 32.5,
       "contribution_pct": 47.3,
       "is_catchall_bucket": true
-    }
+    },
+    "explanation": "Desktop traffic increased by\u202f36.2 points, which alone represents\u202f49.6\u202f% of the overall shift.\u202fSeparately, an unspecified \u201cother\u202fcountry\u201d segment rose by\u202f32.5 points, contributing\u202f47.3\u202f% of the change."
   },
   {
     "date": "20201124",
@@ -69,7 +72,8 @@
       "delta": 29.1,
       "contribution_pct": 42.9,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "Desktop activity rose by\u202f45.1%, representing\u202f62.4% of the metric\u2019s change. Separately, traffic from the United\u202fStates increased by\u202f29.1%, contributing\u202f42.9% of the shift."
   },
   {
     "date": "20201220",
@@ -87,7 +91,8 @@
       "delta": -41.6,
       "contribution_pct": 43.3,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "Desktop usage fell sharply on\u202f2020\u201112\u201120, down\u202f54.9% and representing\u202f59.2% of the change.\u202fSeparately, the United\u202fStates also declined\u202f41.6%, contributing\u202f43.3% of the shift."
   },
   {
     "date": "20210112",
@@ -105,7 +110,8 @@
       "delta": 13.7,
       "contribution_pct": 56.3,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "The United States posted a\u202f+16.7\u202f% change, which accounts for\u202f90.2\u202f% of the metric\u2019s shift. Separately, desktop traffic increased by\u202f+13.7\u202f% and contributed\u202f56.3\u202f% of the movement."
   },
   {
     "date": "20210114",
@@ -123,7 +129,8 @@
       "delta": 12.6,
       "contribution_pct": 55.3,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "Mobile device traffic increased by\u202f15.6%, which accounts for\u202f54.5% of the overall shift. Separately, traffic from Canada rose by\u202f12.6%, contributing\u202f55.3% of the change."
   },
   {
     "date": "20210120",
@@ -141,7 +148,8 @@
       "delta": 21.9,
       "contribution_pct": 38.1,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "Desktop traffic increased by\u202f37.8\u202f%, which alone represents\u202f60.0\u202f% of the overall change. Separately, traffic from the United\u202fStates rose by\u202f21.9\u202f%, contributing\u202f38.1\u202f% of the shift."
   },
   {
     "date": "20210122",
@@ -159,6 +167,7 @@
       "delta": 25.9,
       "contribution_pct": 42.5,
       "is_catchall_bucket": false
-    }
+    },
+    "explanation": "Desktop usage jumped 37.9\u202f% on\u202f2021\u201101\u201122, accounting for 62.5\u202f% of the overall change.\u202fSeparately, traffic from Google rose 25.9\u202f%, contributing 42.5\u202f% of the shift."
   }
 ]
