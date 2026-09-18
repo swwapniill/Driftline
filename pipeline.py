@@ -12,8 +12,8 @@ from prompt_template import SYSTEM_PROMPT
 
 load_dotenv()
 client = bigquery.Client(project="anomaly-explainer")
-groq_client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
-SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
+groq_client = Groq(api_key=os.environ.get("GROQ_API_KEY", "").strip())
+SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL", "").strip()
 
 def check_anomaly(target_date):
     query = """
