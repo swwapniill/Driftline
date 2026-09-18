@@ -192,8 +192,8 @@ document.querySelectorAll('.row-summary').forEach(row => {{
 """
 
 import os
-os.makedirs('dashboard', exist_ok=True)
-with open('dashboard/index.html', 'w') as f:
+os.makedirs('docs', exist_ok=True)
+with open('docs/index.html', 'w') as f:
     f.write(html_output)
 
 print("Dashboard written to dashboard/index.html")
